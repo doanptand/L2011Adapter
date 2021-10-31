@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SmileView">
+        <attr name="doanpt_smile_face_color" format="color" />
+        <attr name="doanpt_smile_face_radius" format="dimension" />
+    </declare-styleable>
+</resources>

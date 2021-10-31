@@ -9,6 +9,7 @@ import com.ddona.adpater.adapter.Contact2Adapter
 import com.ddona.adpater.adapter.ContactAdapter
 import com.ddona.adpater.databinding.ActivityMainBinding
 import com.ddona.adpater.model.Contact
+import com.ddona.adpater.view.SmileView
 
 class MainActivity : AppCompatActivity() {
     //data: fake data-> Database, Apis, Firebase...vvv
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         //adapterView
         adapter = ContactAdapter()
         adapter.submitData(contacts)
