@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //adapterView
-        adapter = ContactAdapter(contacts)
+        adapter = ContactAdapter()
+        adapter.submitData(contacts)
         binding.rvContacts.adapter = adapter
         binding.rvContacts.layoutManager =
             LinearLayoutManager(
@@ -36,9 +37,11 @@ class MainActivity : AppCompatActivity() {
                 LinearLayoutManager.VERTICAL,
                 false
             )
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(binding.rvContacts)
     }
 
-    private val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(
+    private val callback = object : ItemTouchHelper.SimpleCallback(
         ItemTouchHelper.UP or ItemTouchHelper.DOWN,
         ItemTouchHelper.START or ItemTouchHelper.END
     ) {
@@ -51,15 +54,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            if (direction == ItemTouchHelper.START) {
-                //delete
-                val position = viewHolder.adapterPosition
-                contacts.removeAt(position)
-                adapter.notifyDataSetChanged()
-//                adapter.notifyItemRemoved(position)
-            } else {
-                //another things
-            }
+            val position = viewHolder.adapterPosition
+            contacts.removeAt(position)
+            adapter.submitData(contacts)
         }
 
     }

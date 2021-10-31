@@ -2,12 +2,27 @@ package com.ddona.adpater.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ddona.adpater.databinding.ItemContactBinding
+import com.ddona.adpater.diff.ContactDiff
 import com.ddona.adpater.model.Contact
 
-class ContactAdapter(private val contacts: List<Contact>) :
+
+class ContactAdapter :
     RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+    //old data
+    private val contacts = arrayListOf<Contact>()
+
+    //new data
+    fun submitData(temp: List<Contact>) {
+        val diff = ContactDiff(contacts, temp)
+        val diffResult = DiffUtil.calculateDiff(diff)
+
+        this.contacts.clear()
+        this.contacts.addAll(temp)
+        diffResult.dispatchUpdatesTo(this)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactAdapter.ViewHolder {
         return ViewHolder(
