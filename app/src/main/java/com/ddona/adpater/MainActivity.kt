@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ddona.adpater.adapter.Contact2Adapter
 import com.ddona.adpater.adapter.ContactAdapter
 import com.ddona.adpater.databinding.ActivityMainBinding
 import com.ddona.adpater.model.Contact
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private lateinit var adapter: ContactAdapter
+//    private lateinit var adapter: Contact2Adapter
 
 
     private lateinit var binding: ActivityMainBinding
@@ -30,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         //adapterView
         adapter = ContactAdapter()
         adapter.submitData(contacts)
+//        adapter = Contact2Adapter()
+//        adapter.submitList(contacts)
+
         binding.rvContacts.adapter = adapter
         binding.rvContacts.layoutManager =
             LinearLayoutManager(
@@ -56,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val position = viewHolder.adapterPosition
             contacts.removeAt(position)
+//            adapter.submitList(contacts)
             adapter.submitData(contacts)
         }
 
